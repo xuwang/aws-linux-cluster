@@ -14,7 +14,7 @@ module "web" {
 
     # Note: currently web launch_configuration devices can NOT be changed after web cluster is up
     # See https://github.com/hashicorp/terraform/issues/2910
-    docker_volume_size = 12
+    data_volume_size = 12
     root_volume_size = 12
 
     # vpc
