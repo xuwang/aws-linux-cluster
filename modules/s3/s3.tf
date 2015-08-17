@@ -26,11 +26,11 @@ resource "aws_s3_bucket" "config" {
 
 # s3 bucket for data backup
 resource "aws_s3_bucket" "data" {
-    bucket = "${var.bucket_prefix}-logs"
+    bucket = "${var.bucket_prefix}-data"
     force_destroy = true
     acl = "private"
     tags {
-        Name = "Logs"
+        Name = "Date"
     }
 }
 
