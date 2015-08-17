@@ -9,6 +9,7 @@ variable "cluster_desired_capacity" { default = 1 }
 variable "keypair" { default = "web" }
 variable "root_volume_size" { default = 12 }
 variable "data_volume_size" { default = 12 }
+variable "user_data_file" { default = "cloud-config/web" }
 
 # networking vars set by module.vpc
 variable "vpc_id" { }

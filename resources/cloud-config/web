@@ -1,0 +1,4 @@
+#cloud-config
+
+# Place holder. You can put user-data here.
+# Examples: http://cloudinit.readthedocs.org/en/latest/topics/examples.html

@@ -44,7 +44,7 @@ resource "aws_launch_configuration" "web" {
     volume_size = "${var.data_volume_size}" 
   }
   
-  user_data = "${file("cloud-config/s3-cloudconfig-bootstrap.sh")}"
+  user_data = "${file("${var.user_data_file")}"
 }
 
 # setup the web ec2 profile, role and polices

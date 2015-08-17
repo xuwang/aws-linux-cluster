@@ -43,7 +43,7 @@ resource "aws_launch_configuration" "app" {
     volume_size = "${var.data_volume_size}" 
   }
 
-  user_data = "${file("cloud-config/s3-cloudconfig-bootstrap.sh")}"
+  user_data = "${file("${var.user_data_file")}"
 }
 
 resource "aws_iam_instance_profile" "app" {
