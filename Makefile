@@ -58,6 +58,7 @@ destroy_all: \
 	destroy_app \
 	destroy_web \
 	destroy_iam \
+	destroy_s3 \
 	destroy_vpc
 
 clean_all: destroy_all
