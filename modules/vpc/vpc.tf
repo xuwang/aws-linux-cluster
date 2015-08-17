@@ -15,11 +15,29 @@ resource "aws_internet_gateway" "cluster" {
     vpc_id = "${aws_vpc.cluster.id}"
 }
 
-resource "aws_route_table" "cluster" {
+
+resource "aws_route_table" "web" {
     vpc_id = "${aws_vpc.cluster.id}"
     route {
         cidr_block = "${var.all_net}"
         gateway_id = "${aws_internet_gateway.cluster.id}"
+    }
+}
+
+resource "aws_route_table" "app" {
+    vpc_id = "${aws_vpc.cluster.id}"
+    propagating_vgws = ["${vpc_gateway.vpn_gw.id}"]
+    route {
+        cidr_block = "${var.all_net}"
+        gateway_id = "${aws_internet_gateway.cluster.id}"
+    }
+}
+
+resource "aws_vpn_gateway" "vpn_gw" {
+    vpc_id = "${aws_vpc.cluster.id}"
+
+    tags {
+        Name = "${var.cluster_name}"
     }
 }
 
