@@ -1,7 +1,3 @@
-variable "vpc_cidr" { default = "10.96.3.0/16" }
-variable "all_net" { default = "0.0.0.0/0" }
-variable "vpc_name" { default = "cluster" }
-
 resource "aws_vpc" "vpc" {
     cidr_block = "${var.vpc_cidr}"
     enable_dns_support = true
