@@ -16,13 +16,17 @@ $(BUILD): init_build_dir
 
 $(TF_PORVIDER): update_provider
 
+update_provider: | $(BUILD)
+	# Generate tf provider
+	$(SCRIPTS)/gen-provider.sh > $(TF_PORVIDER)
+
 init_build_dir:
 	@mkdir -p $(BUILD)
 	@cp -rf $(RESOURCES)/cloud-config $(BUILD)
 	@cp -rf $(RESOURCES)/certs $(BUILD)
 	@cp -rf $(RESOURCES)/policies $(BUILD)
-	@cp -rf $(RESOURCES)/terraform/variables.tf $(BUILD)
-	@$(SCRIPTS)/substitute-substitute-S3-BUCKET-PREFIX.sh.sh $(POLICIES)/*.json
+	@cp -f $(TF_RESOURCES)/variables.tf $(BUILD)
+	@$(SCRIPTS)/substitute-S3-BUCKET-PREFIX.sh $(POLICIES)/*.json
 	@$(SCRIPTS)/substitute-CLUSTER-NAME.sh $(CONFIG)/*.yaml $(POLICIES)/*.json
 
 gen_certs:
