@@ -1,0 +1,6 @@
+build
+*.pem
+*.key
+.DS_Store
+.git
+.terraform
