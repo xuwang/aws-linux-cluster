@@ -12,7 +12,6 @@
 - [Customization](#customization)
 - [Build multi-node cluster](#build-multi-node-cluster)
 - [Manage individual platform resources](#manage-individual-platform-resources)
-- [Use an existing AWS profile](#use-an-existing-aws-profile)
 - [Technical notes](#technical-notes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
