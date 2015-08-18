@@ -77,8 +77,12 @@ Reources are defined under aws-terraform/resources/terraform directory. You shou
 Clone the repo:
 ```
 $ git clone git@github.com:xuwang/aws-linux-cluster.git
-$ cd aws-terraform
+$ cd aws-lunix-cluster
 ```
+
+Customization parameters:
+
+The default values for VPC, subnets,  servers instance profile, policies, keys, autoscaling group, lanuch configurations etc., are defined under modules directory. To change the default values, go to resources/terraform directory and change the variable values in `module-<resource>.tf` 
 
 To build:
 ```
