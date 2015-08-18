@@ -246,17 +246,6 @@ To destroy a resource:
 $ make destroy_<resource> 
 ```
 
-###Use an existing AWS profile
-AWS profile, user, and cluster name are defined at the top of  __Makefile__:
-
-```
-#Profile/Cluster name
-AWS_PROFILE := mycluster
-AWS_USER := mycluster
-CLUSTER_NAME := mycluster
-```
-These can be changed to match your AWS profile and cluster name.
-
 ##Technical notes
 * AWS resources are defined in Terraform resource folders. 
 The build process will copy all resource files from _resources_ to a _build_ directory. 
