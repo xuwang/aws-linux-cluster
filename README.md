@@ -84,6 +84,8 @@ Customization parameters:
 
 The default values for VPC, subnets,  servers instance profile, policies, keys, autoscaling group, lanuch configurations etc., are defined under modules directory. To change the default values, go to resources/terraform directory and change the variable values in `module-<resource>.tf` 
 
+The default image is Red Hat Enterprise Linux 7. 
+
 To build:
 ```
 $ make
@@ -98,7 +100,7 @@ To see the list of resources created:
 ```
 $ make show
 ...
-  module.web.aws_autoscaling_group.etcd:
+module.web.aws_autoscaling_group.web:
   id = web
   availability_zones.# = 3
   availability_zones.2050015877 = us-west-2c
@@ -109,19 +111,21 @@ $ make show
   force_delete = true
   health_check_grace_period = 0
   health_check_type = EC2
-  launch_configuration = terraform-4wjntqyn7rbfld5qa4qj6s3tie
+  launch_configuration = terraform-nozcu25oobfixd5nzmrxw3itze
   load_balancers.# = 0
   max_size = 9
   min_size = 1
-  name = etcd
+  name = web
   tag.# = 1
+  tags.Name = web
+  vpc_id = vpc-987403fd
 ....
 ```
 
 Login to the web node:
 
 ```
-$ ssh -A core@52.27.156.202
+$ ssh -A ec2-user@52.27.156.202
 
 
 ```
