@@ -74,13 +74,13 @@ For other plantforms, follow the tool links and instructions on tool sites.
 
 ## Quick start
 
-### Clone the repo:
+#### Clone the repo:
 ```
 $ git clone git@github.com:xuwang/aws-linux-cluster.git
 $ cd aws-lunix-cluster
 ```
 
-### Run Vagrant ubuntu box with terraform installed (Optional)
+#### Run Vagrant ubuntu box with terraform installed (Optional)
 If you use Vagrant, instead of install tools on your host machine,
 there is Vagranetfile for a Ubuntu box with all the necessary tools installed:
 ```
@@ -89,7 +89,7 @@ $ vagrant ssh
 $ cd aws-lunix-cluster
 ```
 
-### Configure AWS profile with `mycluster` credentials
+#### Configure AWS profile with `mycluster` credentials
 
 ```
 $ aws configure --profile mycluster
@@ -98,7 +98,7 @@ Use the [downloaded aws user credentials](#setup-aws-credentials)
 when prompted.
 
 
-### To build:
+#### To build:
 
 This default build will create one web node and app node cluster in a VPC, 
 with application buckets for data, necessary iam roles, polices, keypairs and keys. 
@@ -150,7 +150,7 @@ $ ssh -A ec2-user@52.27.156.202
 
 ```
 
-### Destroy all resources
+#### Destroy all resources
 
 ```
 $ make destroy_all
