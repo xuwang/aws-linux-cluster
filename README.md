@@ -84,7 +84,7 @@ Clone the repo:
 $ git clone git@github.com:xuwang/aws-linux-cluster.git
 $ cd aws-lunix-cluster
 ```
-Under aws-lunix-cluster directory, we provide a Vagrant Ubuntu virtual box that has awscli, jq, s3cmd, git, and terraform installed. If you use Vagrant, run the following and continue to 
+Under aws-lunix-cluster directory, we provide a Vagrant Ubuntu virtual box that has awscli, jq, s3cmd, git, and terraform installed. If you use Vagrant, fire it up:
 ```
 $ vagrant up
 $ vagrant ssh
