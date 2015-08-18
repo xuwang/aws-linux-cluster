@@ -1,5 +1,5 @@
 
-# AWS linux cluster provisioning with [Terraform](http://www.terraform.io/downloads.html)
+#AWS linux cluster provisioning with [Terraform](https://www.terraform.io/intro/index.html)
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -9,53 +9,40 @@
 - [Setup AWS credentials](#setup-aws-credentials)
 - [Install tools](#install-tools)
 - [Quick start](#quick-start)
+- [Customization](#customization)
 - [Build multi-node cluster](#build-multi-node-cluster)
-- [Destroy all resources](#destroy-all-resources)
 - [Manage individual platform resources](#manage-individual-platform-resources)
 - [Use an existing AWS profile](#use-an-existing-aws-profile)
 - [Technical notes](#technical-notes)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Overview
+##Overview
 
-This is a practical implementation of multi-nodes linux cluster in a vpc built on AWS. The cluster follows 3-tiers architecture that contains web tier, apps tier, and database tier. 
+This is a practical implementation of multi-nodes linux cluster in a vpc built on AWS. 
+The cluster follows 3-tiers architecture that contains web tier, apps tier, and database tier.
 
-The entire infrastructure is managed by Terraform. 
+AWS compoments includes: VPC, IAM, S3, Autoscaling, ELB, Route53, RDS etc. 
 
-AWS compoments includes: VPC, security groups, IAM, S3, ELB, Route53, Autoscaling, RDS etc. 
+The entire infrastructure is managed by [Terraform](https://www.terraform.io/intro/index.html).
 
-AWS resources are defined in Terraform resource folders. The build process will copy all resources defined in the repository to a *build* directory. The view, plan, apply, and destroy operations are performed under *build*, keepting the original Terraform files in the repo intact. The *build* directory is ignored in .gitignore so that you don't accidentally checkin sensitive data. 
+##Setup AWS credentials
 
-## Setup AWS credentials
+Go to [AWS Console](https://console.aws.amazon.com/)
 
-1. Install AWS CLI
-    ```
-    $ brew install awscli
-    ```
-    or
+1. Create a group `mycluster` with `AdministratorAccess` policy.
+2. Create a user `mycluster` and __Download__ the user credentials.
+3. Add user `mycluster` to group `mycluster`.
 
-    ```
-    $ sudo easy_install pip
-    $ sudo pip install --upgrade awscli
-    ```
+##Install tools
 
-1. Setup AWS Credentials at [AWS Console](https://console.aws.amazon.com/)
-    1. Create a group `mycluster` with `AdministratorAccess` policy.
-    2. Create a user `mycluster` and download user credentials.
-    3. Add user `mycluster` to group `mycluster`.
+If you use [Vagrant](https://www.vagrantup.com/), you can skip this section and go to 
+[Quick Start](#quick-start) section.
 
-1. Configure AWS profile with `mycluster` credentials
-    ```
-    $ aws configure --profile mycluster
-    ```
-## Install tools
-
-If you use Vagrant, skip this and go to [Quick Start](https://github.com/xuwang/aws-linux-cluster/blob/master/README.md#quick-start) section.
+Instructions for install tools on MacOS:
 
 1. Install [Terraform](http://www.terraform.io/downloads.html)
 
-    For MacOS,
     ```
     $ brew update
     $ brew install terraform
@@ -73,29 +60,51 @@ If you use Vagrant, skip this and go to [Quick Start](https://github.com/xuwang/
     $ brew install jq
     ```
 
-## Quick start
+1. Install [AWS CLI](https://github.com/aws/aws-cli)
+    ```
+    $ brew install awscli
+    ```
+    or
+
+    ```
+    $ sudo easy_install pip
+    $ sudo pip install --upgrade awscli
+    ```
+
+For other plantforms, follow the tool links and instructions on tool sites.
+
+##Quick start
 
 This default build will create one web node and one app node cluster in a VPC, with application buckets for data, necessary iam roles, polices, keypairs and keys. The instance type for the nodes is t2.micro, the default image is he default image is Red Hat Enterprise Linux 7. 
 
 Resources are defined under aws-terraform/resources/terraform directory. You should review and make changes there if needed.
 
-Clone the repo:
+###Clone the repo:
 ```
 $ git clone git@github.com:xuwang/aws-linux-cluster.git
 $ cd aws-lunix-cluster
 ```
-Under aws-lunix-cluster directory, we provide a Vagrant Ubuntu virtual box that has awscli, jq, s3cmd, git, and terraform installed. If you use Vagrant, fire it up:
+
+###Run Vagrant ubuntu box with terraform installed (Optional)
+If you use Vagrant, instead of install tools on your host machine,
+there is Vagranetfile for a Ubuntu box with all the necessary tools installed:
 ```
 $ vagrant up
 $ vagrant ssh
 $ cd aws-lunix-cluster
 ```
 
-Customization parameters:
+###Configure AWS profile with `mycluster` credentials
 
-The default values for VPC, subnets,  servers instance profile, policies, keys, autoscaling group, lanuch configurations etc., are defined under modules directory. To change the default values, go to resources/terraform directory and change the variable values in `module-<resource>.tf` .
+```
+$ aws configure --profile mycluster
+```
+Use the [downloaded aws user credentials](#setup-aws-credentials)
+when prompted.
 
-To build:
+
+###To build:
+
 ```
 $ make
 ... build steps info ...
@@ -136,9 +145,35 @@ Login to the web node:
 ```
 $ ssh -A ec2-user@52.27.156.202
 
+```
+
+###Destroy all resources
 
 ```
-## Build multi-node cluster
+$ make destroy_all
+```
+This will destroy ALL resources created by this project.
+
+##Customization
+
+* The default values for VPC, ec2 instance profile, policies, keys, autoscaling group, lanuch configurations etc., 
+can be override in resources/terraform/module-<resource>.tf` files.
+
+* AWS profile, user, and cluster name are defined at the top of  _Makefile_:
+
+  ```
+  AWS_PROFILE := mycluster
+  AWS_USER := mycluster
+  CLUSTER_NAME := mycluster
+  ```
+  
+  These can also be customized to match your AWS profile and cluster name.
+
+
+* The defualt AMI is a us-west-2 red hat image which is defined in resources/terraform/variables.tf. 
+  It can be overriden in module-web.tf and module-app.tf.
+
+##Build multi-node cluster
 
 The number of web and app servers are defined in *resource/terraform/module-web.tf* and *resource/terraform/module-apps.tf*
 
@@ -167,15 +202,7 @@ web public ips:  52.26.32.57 52.10.147.7 52.27.156.202
 ...
 ```
 
-
-## Destroy all resources
-
-```
-$ make destroy_all
-```
-This will destroy ALL resources created by this project.
-
-## Manage individual platform resources
+##Manage individual platform resources
 
 You can create individual resources and the automated-scripts will create resources automatically based on dependencies. 
 ```
@@ -220,25 +247,26 @@ To destroy a resource:
 $ make destroy_<resource> 
 ```
 
-### Use an existing AWS profile
-AWS profile, user, and cluster name are defined at the top of  _Makefile_:
+###Use an existing AWS profile
+AWS profile, user, and cluster name are defined at the top of  __Makefile__:
 
 ```
-# Profile/Cluster name
+#Profile/Cluster name
 AWS_PROFILE := mycluster
 AWS_USER := mycluster
 CLUSTER_NAME := mycluster
 ```
 These can be changed to match your AWS profile and cluster name.
 
-## Technical notes
-* Makefiles define resource dependencies and use scripts to generate necessart Terraform 
-variables and configurations. 
-This provides stream-lined build automation. 
-* All nodes use a common bootstrap shell script as user-data which can be customized to do post-boot provisioning.
-* The defualt AMI is defined in resources/terraform/variables.tf. It can be overriden in module-web.tf and module-app.tf.
-*Terraform auto-generated launch configuration name and CBD feature is used 
-to allow change of launch configuration on a live autoscaling group, e.g. ami id, image type, cluster size, etc.
-However, exisiting ec2 instances in the autoscaling group has to be recycled to pick up new LC, e.g. 
-terminate instance to let AWS create a new instance.
+##Technical notes
+* AWS resources are defined in Terraform resource folders. 
+The build process will copy all resource files from _resources_ to a _build_ directory. 
+The terraform actions are performed under _build_, which is ignored in .gitignore,
+keepting the original Terraform files in the repo intact. 
+* Makefiles and shell scripts are used to give us more flexibility on tasks Terraform 
+leftover. This provides stream-lined build automation. 
+* All nodes can have a customized cloud-config file to do post-boot provisioning.
+* Terraform auto-generated launch configuration name and CBD feature is used 
+to allow change of launch configuration on a live autoscaling group, 
+however running ec2 instances in the autoscaling group has to be recycled to pick up new LC.
 
