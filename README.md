@@ -1,9 +1,9 @@
 
-#AWS linux cluster provisioning with [Terraform](https://www.terraform.io/intro/index.html)
+# AWS linux cluster provisioning with [Terraform](https://www.terraform.io/intro/index.html)
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-##Table of Contents##
+## Table of Contents##
 
 - [Overview](#overview)
 - [Setup AWS credentials](#setup-aws-credentials)
@@ -16,7 +16,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-##Overview
+## Overview
 
 This is a practical implementation of multi-nodes linux cluster in a vpc built on AWS. 
 The cluster follows 3-tiers architecture that contains web tier, apps tier, and database tier.
@@ -25,7 +25,7 @@ AWS compoments includes: VPC, IAM, S3, Autoscaling, ELB, Route53, RDS etc.
 
 The entire infrastructure is managed by [Terraform](https://www.terraform.io/intro/index.html).
 
-##Setup AWS credentials
+## Setup AWS credentials
 
 Go to [AWS Console](https://console.aws.amazon.com/)
 
@@ -33,7 +33,7 @@ Go to [AWS Console](https://console.aws.amazon.com/)
 2. Create a user `mycluster` and __Download__ the user credentials.
 3. Add user `mycluster` to group `mycluster`.
 
-##Install tools
+## Install tools
 
 If you use [Vagrant](https://www.vagrantup.com/), you can skip this section and go to 
 [Quick Start](#quick-start) section.
@@ -72,19 +72,15 @@ Instructions for install tools on MacOS:
 
 For other plantforms, follow the tool links and instructions on tool sites.
 
-##Quick start
+## Quick start
 
-This default build will create one web node and one app node cluster in a VPC, with application buckets for data, necessary iam roles, polices, keypairs and keys. The instance type for the nodes is t2.micro, the default image is he default image is Red Hat Enterprise Linux 7. 
-
-Resources are defined under aws-terraform/resources/terraform directory. You should review and make changes there if needed.
-
-###Clone the repo:
+### Clone the repo:
 ```
 $ git clone git@github.com:xuwang/aws-linux-cluster.git
 $ cd aws-lunix-cluster
 ```
 
-###Run Vagrant ubuntu box with terraform installed (Optional)
+### Run Vagrant ubuntu box with terraform installed (Optional)
 If you use Vagrant, instead of install tools on your host machine,
 there is Vagranetfile for a Ubuntu box with all the necessary tools installed:
 ```
@@ -93,7 +89,7 @@ $ vagrant ssh
 $ cd aws-lunix-cluster
 ```
 
-###Configure AWS profile with `mycluster` credentials
+### Configure AWS profile with `mycluster` credentials
 
 ```
 $ aws configure --profile mycluster
@@ -102,7 +98,15 @@ Use the [downloaded aws user credentials](#setup-aws-credentials)
 when prompted.
 
 
-###To build:
+### To build:
+
+This default build will create one web node and app node cluster in a VPC, 
+with application buckets for data, necessary iam roles, polices, keypairs and keys. 
+The instance type for the nodes is t2.micro. 
+The default image is he default image is Red Hat Enterprise Linux 7. 
+You can review the configuration and make changes there if needed. 
+See [Customization](#customization) for details.
+
 
 ```
 $ make
@@ -146,14 +150,14 @@ $ ssh -A ec2-user@52.27.156.202
 
 ```
 
-###Destroy all resources
+### Destroy all resources
 
 ```
 $ make destroy_all
 ```
 This will destroy ALL resources created by this project.
 
-##Customization
+## Customization
 
 * The default values for VPC, ec2 instance profile, policies, keys, autoscaling group, lanuch configurations etc., 
 can be override in resources/terraform/module-<resource>.tf` files.
@@ -172,7 +176,7 @@ can be override in resources/terraform/module-<resource>.tf` files.
 * The defualt AMI is a us-west-2 red hat image which is defined in resources/terraform/variables.tf. 
   It can be overriden in module-web.tf and module-app.tf.
 
-##Build multi-node cluster
+## Build multi-node cluster
 
 The number of web and app servers are defined in *resource/terraform/module-web.tf* and *resource/terraform/module-apps.tf*
 
@@ -201,7 +205,7 @@ web public ips:  52.26.32.57 52.10.147.7 52.27.156.202
 ...
 ```
 
-##Manage individual platform resources
+## Manage individual platform resources
 
 You can create individual resources and the automated-scripts will create resources automatically based on dependencies. 
 ```
@@ -246,7 +250,7 @@ To destroy a resource:
 $ make destroy_<resource> 
 ```
 
-##Technical notes
+## Technical notes
 * AWS resources are defined in Terraform resource folders. 
 The build process will copy all resource files from _resources_ to a _build_ directory. 
 The terraform actions are performed under _build_, which is ignored in .gitignore,
