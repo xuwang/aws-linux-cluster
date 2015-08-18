@@ -261,6 +261,6 @@ leftover. This provides stream-lined build automation.
 * Terraform auto-generated launch configuration name and CBD feature is used 
 to allow change of launch configuration on a live autoscaling group, 
 however running ec2 instances in the autoscaling group has to be recycled to pick up new LC.
-* For a production system, the securitey groups defined in web and app module 
+* For a production system, the security groups defined in web and app module 
 should be carefully reviewed and tightened.
 
