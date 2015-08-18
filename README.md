@@ -6,7 +6,8 @@
 ##Table of Contents##
 
 - [Overview](#overview)
-- [Install tools and setup AWS credentials](#install-tools-and-setup-aws-credentials)
+- [Setup AWS credentials](#setup-aws-credentials)
+- [Install tools](#install-tools)
 - [Quick start](#quick-start)
 - [Build multi-node cluster](#build-multi-node-cluster)
 - [Destroy all resources](#destroy-all-resources)
@@ -26,7 +27,31 @@ AWS compoments includes: VPC, security groups, IAM, S3, ELB, Route53, Autoscalin
 
 AWS resources are defined in Terraform resource folders. The build process will copy all resources defined in the repository to a *build* directory. The view, plan, apply, and destroy operations are performed under *build*, keepting the original Terraform files in the repo intact. The *build* directory is ignored in .gitignore so that you don't accidentally checkin sensitive data. 
 
-## Install Tools and Setup AWS credentials
+## Setup AWS credentials
+
+1. Install AWS CLI
+    ```
+    $ brew install awscli
+    ```
+    or
+
+    ```
+    $ sudo easy_install pip
+    $ sudo pip install --upgrade awscli
+    ```
+
+1. Setup AWS Credentials at [AWS Console](https://console.aws.amazon.com/)
+    1. Create a group `mycluster` with `AdministratorAccess` policy.
+    2. Create a user `mycluster` and download user credentials.
+    3. Add user `mycluster` to group `mycluster`.
+
+1. Configure AWS profile with `mycluster` credentials
+    ```
+    $ aws configure --profile mycluster
+    ```
+## Install tools
+
+If you use Vagrant, skip this and go to [Quick Start](https://github.com/xuwang/aws-linux-cluster/blob/master/README.md#quick-start) section.
 
 1. Install [Terraform](http://www.terraform.io/downloads.html)
 
@@ -43,41 +68,26 @@ AWS resources are defined in Terraform resource folders. The build process will 
     $ unzip terraform_0.6.0_darwin_amd64.zip
     ```
 
-1. Install AWS CLI
-    ```
-    $ brew install awscli
-    ```
-    or
-
-    ```
-    $ sudo easy_install pip
-    $ sudo pip install --upgrade awscli
-    ```
-
 1. Install [Jq](http://stedolan.github.io/jq/)
     ```
     $ brew install jq
-    ```
-
-1. Setup AWS Credentials at [AWS Console](https://console.aws.amazon.com/)
-    1. Create a group `mycluster` with `AdministratorAccess` policy.
-    2. Create a user `mycluster` and download user credentials.
-    3. Add user `mycluster` to group `mycluster`.
-
-1. Configure AWS profile with `mycluster` credentials
-    ```
-    $ aws configure --profile mycluster
     ```
 
 ## Quick start
 
 This default build will create one web node and one app node cluster in a VPC, with application buckets for data, necessary iam roles, polices, keypairs and keys. The instance type for the nodes is t2.micro, the default image is he default image is Red Hat Enterprise Linux 7. 
 
-Resources are defined under aws-terraform/resources/terraform directory. You should review and make changes there if needed. 
+Resources are defined under aws-terraform/resources/terraform directory. You should review and make changes there if needed.
 
 Clone the repo:
 ```
 $ git clone git@github.com:xuwang/aws-linux-cluster.git
+$ cd aws-lunix-cluster
+```
+Under aws-lunix-cluster directory, we provide a Vagrant Ubuntu virtual box that has awscli, jq, s3cmd, git, and terraform installed. If you use Vagrant, run the following and continue to 
+```
+$ vagrant up
+$ vagrant ssh
 $ cd aws-lunix-cluster
 ```
 
