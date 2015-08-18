@@ -251,7 +251,7 @@ $ make destroy_<resource>
 ```
 
 ## Technical notes
-* AWS resources are defined in Terraform resource folders. 
+* AWS resources are defined in resources and modules directories. 
 The build process will copy all resource files from _resources_ to a _build_ directory. 
 The terraform actions are performed under _build_, which is ignored in .gitignore,
 keepting the original Terraform files in the repo intact. 
@@ -261,4 +261,6 @@ leftover. This provides stream-lined build automation.
 * Terraform auto-generated launch configuration name and CBD feature is used 
 to allow change of launch configuration on a live autoscaling group, 
 however running ec2 instances in the autoscaling group has to be recycled to pick up new LC.
+* For a production system, the securitey groups defined in web and app module 
+should be carefully reviewed and tightened.
 
