@@ -71,8 +71,9 @@ AWS resources are defined in Terraform resource folders. The build process will 
 
 ## Quick start
 
-This default build will create one etcd node and one worker node cluster in a VPC, with application buckets for data, necessary iam roles, polices, keypairs and keys. The nodes are t2.micro instance and run the latest CoreOS beta release.
-Reources are defined under aws-terraform/resources/terraform directory. You should review and make changes there if needed. 
+This default build will create one web node and one app node cluster in a VPC, with application buckets for data, necessary iam roles, polices, keypairs and keys. The instance type for the nodes is t2.micro, the default image is he default image is Red Hat Enterprise Linux 7. 
+
+Resources are defined under aws-terraform/resources/terraform directory. You should review and make changes there if needed. 
 
 Clone the repo:
 ```
@@ -82,9 +83,7 @@ $ cd aws-lunix-cluster
 
 Customization parameters:
 
-The default values for VPC, subnets,  servers instance profile, policies, keys, autoscaling group, lanuch configurations etc., are defined under modules directory. To change the default values, go to resources/terraform directory and change the variable values in `module-<resource>.tf` 
-
-The default image is Red Hat Enterprise Linux 7. 
+The default values for VPC, subnets,  servers instance profile, policies, keys, autoscaling group, lanuch configurations etc., are defined under modules directory. To change the default values, go to resources/terraform directory and change the variable values in `module-<resource>.tf` .
 
 To build:
 ```
@@ -131,16 +130,14 @@ $ ssh -A ec2-user@52.27.156.202
 ```
 ## Build multi-node cluster
 
-The number of etcd nodes and worker nodes are defined in *resource/terraform/module-web.tf* and *resource/terraform/module-apps.tf*
+The number of web and app servers are defined in *resource/terraform/module-web.tf* and *resource/terraform/module-apps.tf*
 
-Change the cluster_desired_capacity in the file to build multi-nodes etcd/worker cluster,
+Change the cluster_desired_capacity in the file to build multi-nodes web/app cluster,
 for example, change to 3:
 
 ```
     cluster_desired_capacity = 3
 ```
-
-Note: etcd minimum, maximum and cluster_desired_capacity should be the same and in odd number, e.g. 3, 5, 9
 
 You should also change the [aws_instance_type](http://aws.amazon.com/ec2/instance-types) 
 from `micro` to `medium` or `large` if more powerful machines are desired:
@@ -175,8 +172,8 @@ You can create individual resources and the automated-scripts will create resour
 $ make help
 
 Usage: make (<resource> | destroy_<resource> | plan_<resource> | refresh_<resource> | show | graph )
-Available resources: vpc s3 route53 iam etcd worker
-For example: make worker
+Available resources: vpc s3 route53 web app rds
+For example: make app
 ```
 
 Currently defined resources:
