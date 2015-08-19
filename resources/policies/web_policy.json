@@ -4,23 +4,36 @@
     {
       "Effect": "Allow",
       "Action": [
-        "s3:*"
-      ],
-      "Resource": [
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/*",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-config",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-config/*"
-      ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
         "ec2:Describe*",
         "autoscaling:Describe*"
       ],
       "Resource": [
         "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data/*"
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-log",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-log/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:List*",
+        "s3:Get*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/web",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/web/*",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-config",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-config/*"
       ]
     }
   ]

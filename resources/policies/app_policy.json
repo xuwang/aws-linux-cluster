@@ -14,14 +14,24 @@
     {
       "Effect": "Allow",
       "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data/*"
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-log",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-log/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "s3:List*",
         "s3:Get*"
       ],
       "Resource": [
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/etcd/initial-cluster",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/worker",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/worker/*",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/app",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-cloudinit/app/*",
         "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-config",
         "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-config/*"
       ]
