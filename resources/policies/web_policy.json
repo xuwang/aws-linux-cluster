@@ -18,9 +18,9 @@
       ],
       "Resource": [
         "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data/*"
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-log",
-        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-log/*"
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-data/*",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-logs",
+        "arn:aws:s3:::AWS-ACCOUNT-CLUSTER-NAME-logs/*"
       ]
     },
     {
