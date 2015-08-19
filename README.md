@@ -104,7 +104,7 @@ This default build will create one web node and app node cluster in a VPC,
 with application buckets for data, necessary iam roles, polices, keypairs and keys. 
 The instance type for the nodes is t2.micro. 
 The default image is he default image is Red Hat Enterprise Linux 7. 
-You can review the configuration and make changes there if needed. 
+You can review the configuration and make changes if needed. 
 See [Customization](#customization) for details.
 
 
@@ -230,7 +230,7 @@ Resource | Description
 *rds* | RDS servers
 *cloudtrail* | Setup AWS CloudTrail
 
-To build the cluster step by step by step:
+To build the cluster step by step:
 
 ```
 $ make init
