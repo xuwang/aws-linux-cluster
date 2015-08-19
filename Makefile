@@ -2,9 +2,15 @@
 ## Customization ##
 ###################
 # Profile/Cluster name
-AWS_PROFILE := mycluster
-AWS_USER := mycluster
-CLUSTER_NAME := mycluster
+AWS_PROFILE := coreos-cluster
+AWS_USER := coreos-cluster
+CLUSTER_NAME := coreos-cluster
+
+
+# For get-ami.sh
+AMI_NAME_PREFIX := RHEL-7.1
+VM_TYPE := hvm
+AMI_VARS=$(BUILD)/ami.tf
 
 # For substitude-AWS-ACCOUNT.sh. Default to AWS account number.
 S3_BUCKET_PREFIX=mycluster

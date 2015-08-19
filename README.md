@@ -173,8 +173,14 @@ can be override in resources/terraform/module-<resource>.tf` files.
   These can also be customized to match your AWS profile and cluster name.
 
 
-* The defualt AMI is a us-west-2 red hat image which is defined in resources/terraform/variables.tf. 
-  It can be overriden in module-web.tf and module-app.tf.
+* The defualt AMI is Red Hat Enterprise Linux 7.1. The AMI ID is generated with parameters defined in Makefile:
+
+  ```
+  # For get-ami.sh
+  AMI_NAME_PREFIX := RHEL-7.1
+  VM_TYPE := hvm
+  ```
+  It can also be overriden in module-web.tf and module-app.tf.
 
 ## Build multi-node cluster
 

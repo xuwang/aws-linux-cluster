@@ -10,22 +10,27 @@ graph: | $(BUILD)
 refresh: init
 	cd $(BUILD); $(TF_REFRESH)
 
-init: | $(TF_PORVIDER)
+init: | $(TF_PORVIDER) $(AMI_VARS)
 
 $(BUILD): init_build_dir
 
 $(TF_PORVIDER): update_provider
 
+$(AMI_VARS): update_ami
+
 update_provider: | $(BUILD)
 	# Generate tf provider
 	$(SCRIPTS)/gen-provider.sh > $(TF_PORVIDER)
+
+update_ami:	| $(BUILD)
+	# Generate default AMI ids
+	$(SCRIPTS)/get-ami.sh > $(AMI_VARS)
 
 init_build_dir:
 	@mkdir -p $(BUILD)
 	@cp -rf $(RESOURCES)/cloud-config $(BUILD)
 	@cp -rf $(RESOURCES)/certs $(BUILD)
 	@cp -rf $(RESOURCES)/policies $(BUILD)
-	@cp -f $(TF_RESOURCES)/variables.tf $(BUILD)
 	@$(SCRIPTS)/substitute-S3-BUCKET-PREFIX.sh $(POLICIES)/*.json
 	@$(SCRIPTS)/substitute-CLUSTER-NAME.sh $(CONFIG)/*.yaml $(POLICIES)/*.json
 

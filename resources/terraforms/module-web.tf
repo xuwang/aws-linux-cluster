@@ -10,7 +10,7 @@ module "web" {
     # aws
     aws_account_id="${var.aws_account.id}"
     aws_region = "us-west-2"
-    ami = "${lookup(var.amis, "us-west-2")}"
+    ami = "${var.ami}"
 
     # Note: currently web launch_configuration devices can NOT be changed after web cluster is up
     # See https://github.com/hashicorp/terraform/issues/2910

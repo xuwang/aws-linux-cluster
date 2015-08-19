@@ -24,7 +24,7 @@ clean_app: destroy_app
 	rm -f $(BUILD)/module-app.tf
 
 init_app: vpc s3 iam
-	cp -rf $(RESOURCES)/terraforms/module-app.tf $(BUILD)
+	cp -f $(RESOURCES)/terraforms/module-app.tf $(BUILD)
 	cd $(BUILD); $(TF_GET);
 
 app_ips:

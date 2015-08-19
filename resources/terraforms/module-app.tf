@@ -11,7 +11,7 @@ module "app" {
     # aws
     aws_account_id="${var.aws_account.id}"
     aws_region = "us-west-2"
-    ami = "${lookup(var.amis, "us-west-2")}"
+    ami = "${var.ami}"
 
     # vpc
     vpc_id = "${module.vpc.vpc_id}"

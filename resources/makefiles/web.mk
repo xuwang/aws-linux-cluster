@@ -24,7 +24,7 @@ clean_web: destroy_web
 	rm -f $(BUILD)/module-web.tf
 
 init_web: vpc s3 iam
-	cp -rf $(RESOURCES)/terraforms/module-web.tf $(BUILD)
+	cp -f $(RESOURCES)/terraforms/module-web.tf $(BUILD)
 	cd $(BUILD); $(TF_GET);
 
 web_ips:
