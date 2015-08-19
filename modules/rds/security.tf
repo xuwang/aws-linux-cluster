@@ -1,7 +1,7 @@
-resource "aws_security_group" "rds"  {
+resource "aws_security_group" "postgres"  {
     name = "rds"
     vpc_id = "${var.vpc_id}"
-    description = "rds SG"
+    description = "postgres SG"
 
     # Allow all outbound traffic
     egress {
