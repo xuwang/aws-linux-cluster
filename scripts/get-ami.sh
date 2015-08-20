@@ -63,7 +63,7 @@ EOF
 ami=$( jq "$JQ_FILTER" ${AMIS_JSON} )
 ami_id=$(echo $ami | jq --raw-output '.ImageId')
 if [ "$ami_id" = "null" ] || [ -z "$ami_id" ]; then
-  echo Error: Faild to get AMI ID with prefix=$AMI_NAME_PREFIX and vm_time=$VM_TYPE, $ami_id
+  echo Error: Faild to get AMI ID with prefix=$AMI_NAME_PREFIX and vm_time=$VM_TYPE
   exit 1
 fi
 ami_name=$(echo $ami | jq --raw-output '.Name')
