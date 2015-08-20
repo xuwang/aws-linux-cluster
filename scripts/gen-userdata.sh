@@ -7,7 +7,6 @@
 
 # aws profile
 AWS_PROFILE=${AWS_PROFILE:-mycluster}
-AWS_USER=${AWS_USER:-mycluster}
 CLUSTER_NAME=${CLUSTER_NAME:-mycluster}
 
 CLOUDINIT_BUCKET=${CLOUDINIT_BUCKET:-${CLUSTER_NAME}-cloudinit}
@@ -24,8 +23,7 @@ then
     exit 1
 fi
 
-S3_BUCKET_PREFIX=$(aws --profile ${AWS_PROFILE} iam get-user --user-name=${AWS_USER} \
-      | jq ".User.Arn" | grep -Eo '[[:digit:]]{12}')
+S3_BUCKET_PREFIX=$(aws --profile ${AWS_PROFILE} iam get-user | jq ".User.Arn" | grep -Eo '[[:digit:]]{12}')
 BUCKET_URL="s3://${S3_BUCKET_PREFIX}-${CLOUDINIT_BUCKET}"
 YAML="${AWS_ROLE}/cloud-config.yaml"
 TMP_DIR="user-data"

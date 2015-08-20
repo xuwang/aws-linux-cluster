@@ -2,10 +2,8 @@
 ## Customization ##
 ###################
 # Profile/Cluster name
-AWS_PROFILE := coreos-cluster
-AWS_USER := coreos-cluster
-CLUSTER_NAME := coreos-cluster
-
+AWS_PROFILE := mycluster
+CLUSTER_NAME := mycluster
 
 # For get-ami.sh
 AMI_NAME_PREFIX := RHEL-7.1
@@ -48,7 +46,7 @@ TF_DESTROY := terraform destroy -force
 
 export
 
-all: web 
+all: web
 
 help:
 	@echo "Usage: make (<resource> | destroy_<resource> | plan_<resource> | refresh_<resource> | show | graph )"

@@ -4,11 +4,10 @@
 key='mycluster'
 
 AWS_PROFILE=${AWS_PROFILE:-mycluster}
-AWS_USER=${AWS_USER:-mycluster}
 CLUSTER_NAME=${CLUSTER_NAME:-mycluster}
 
 echo "Getting AWS account number..."
-S3_BUCKET_PREFIX=$(aws --profile ${AWS_PROFILE} iam get-user --user-name=${AWS_USER} | jq ".User.Arn" | grep -Eo '[[:digit:]]{12}')
+S3_BUCKET_PREFIX=$(aws --profile ${AWS_PROFILE} iam get-user | jq ".User.Arn" | grep -Eo '[[:digit:]]{12}')
 echo $S3_BUCKET_PREFIX
 
 TMP_DIR=keypairs
