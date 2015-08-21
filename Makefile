@@ -4,6 +4,9 @@
 # Profile/Cluster name
 AWS_PROFILE := mycluster
 CLUSTER_NAME := mycluster
+# To prevent you mistakenly using a wrong account (and end up destroying live environment),
+# a list of allowed AWS account IDs should be defined:
+#ALLOWED_ACCOUNT_IDS := "123456789012","012345678901"
 
 # For get-ami.sh
 AMI_NAME_PREFIX := RHEL-7.1
