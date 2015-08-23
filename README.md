@@ -18,8 +18,8 @@
 
 ## Overview
 
-This is a practical implementation of multi-nodes linux cluster in a vpc built on AWS. 
-The cluster follows 3-tiers architecture that contains web tier, apps tier, and database tier.
+This is a practical implementation of multi-node Linux cluster in a vpc built on AWS. The Terraform code is based on [aws-coreos-terraform] (https://github.com/xuwang/aws-terraform), but not CoreOS specific. 
+The cluster follows 3-tier architecture that contains web tier, apps tier, and database tier.
 
 AWS compoments includes: VPC, IAM, S3, Autoscaling, ELB, Route53, RDS etc. 
 
