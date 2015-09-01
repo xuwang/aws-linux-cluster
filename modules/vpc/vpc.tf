@@ -70,7 +70,7 @@ output "internet_getway" {
     value = "${aws_internet_gateway.igw.id}"
 }
 
-output "vpn_getway" {
+output "vpn_gateway" {
     value = "${aws_vpn_gateway.vgw.id}"
 }
 
