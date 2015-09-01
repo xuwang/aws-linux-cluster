@@ -25,9 +25,16 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "~/.aws", "/home/vagrant/.aws"
   config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
 
+  # To enable ssh agent fowarding and
+  # add vagrant insecure_private_key to ssh-agent for fleet ssh
+  # if you are using a different private_keys vs the default vagrant's insecure_private_key,
+  # add them to ssh-agent:
+  #                        ssh-add <your_cluster_private_key>
+  config.ssh.forward_agent = true
+
   # Get rid of stdin: not tty error
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
-
+  
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
