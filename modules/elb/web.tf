@@ -46,6 +46,7 @@ EOF
   }
 }
 
+/*
 # DNS registration
 resource "aws_route53_record" "private-www" {
   zone_id = "${var.route53_private_zone_id}"
@@ -58,8 +59,6 @@ resource "aws_route53_record" "private-www" {
     evaluate_target_health = true
   }
 }
-
-/*
 resource "aws_route53_record" "public-www" {
   zone_id = "${var.route53_public_zone_id}"
   name = "www"
