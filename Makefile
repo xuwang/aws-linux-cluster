@@ -54,7 +54,7 @@ all: web
 help:
 	@echo "Usage: make (<resource> | destroy_<resource> | plan_<resource> | refresh_<resource> | show | graph )"
 	@echo "Available resources: vpc s3 route53 iam elb web app rds"
-	@echo "For example: make app"
+	@echo "For example: make plan_app # to show what resources are planned for app"
 
 destroy: 
 	@echo "Usage: make destroy_<resource>"

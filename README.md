@@ -219,7 +219,7 @@ $ make help
 
 Usage: make (<resource> | destroy_<resource> | plan_<resource> | refresh_<resource> | show | graph )
 Available resources: vpc s3 route53 web app rds
-For example: make app
+For example: make plan_app  # to show what resources are planned for app
 ```
 
 Currently defined resources:

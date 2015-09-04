@@ -18,6 +18,8 @@ $(TF_PORVIDER): update_provider
 
 $(AMI_VARS): update_ami
 
+$(SITE_CERT): gen_certs
+
 update_provider: | $(BUILD)
 	# Generate tf provider
 	$(SCRIPTS)/gen-provider.sh > $(TF_PORVIDER)
