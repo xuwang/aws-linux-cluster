@@ -1,10 +1,10 @@
-app: init_app 
+app: init_app vpc s3 iam
 	cd $(BUILD); \
 		$(SCRIPTS)/aws-keypair.sh -c app; \
 		$(TF_APPLY) -target module.app
 	@$(MAKE) app_ips
 
-plan_app: init_app
+plan_app: init_app plan_vpc plan_s3 plan_iam
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.app;
 
@@ -23,7 +23,7 @@ destroy_app: | $(TF_PORVIDER)
 clean_app: destroy_app
 	rm -f $(BUILD)/module-app.tf
 
-init_app: vpc s3 iam
+init_app:
 	cp -f $(RESOURCES)/terraforms/module-app.tf $(BUILD)
 	cd $(BUILD); $(TF_GET);
 

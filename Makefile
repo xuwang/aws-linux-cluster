@@ -14,7 +14,7 @@ VM_TYPE := hvm
 AMI_VARS=$(BUILD)/ami.tf
 
 # For substitude-AWS-ACCOUNT.sh. Default to AWS account number.
-S3_BUCKET_PREFIX=mycluster
+#S3_BUCKET_PREFIX=
 
 # Working Directories
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -39,7 +39,7 @@ TF_STATE := $(BUILD)/terraform.tfstate
 TF_GET := terraform get -update
 TF_SHOW := terraform show -module-depth=1
 TF_GRAPH := terraform graph -draw-cycles -verbose
-TF_PLAN := terraform plan
+TF_PLAN := terraform plan -module-depth=1
 TF_APPLY := terraform apply
 TF_REFRESH := terraform refresh
 TF_DESTROY := terraform destroy -force
