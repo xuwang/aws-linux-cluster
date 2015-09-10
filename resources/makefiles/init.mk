@@ -31,12 +31,12 @@ update_ami:	| $(BUILD)
 init_build_dir:
 	@mkdir -p $(BUILD)
 	@cp -rf $(RESOURCES)/cloud-config $(BUILD)
-	@cp -rf $(RESOURCES)/certs $(BUILD)
 	@cp -rf $(RESOURCES)/policies $(BUILD)
 	@$(SCRIPTS)/substitute-S3-BUCKET-PREFIX.sh $(POLICIES)/*.json
 	@$(SCRIPTS)/substitute-CLUSTER-NAME.sh $(CONFIG)/*.yaml $(POLICIES)/*.json
 
-gen_certs:
+gen_certs: $(BUILD)
+	@cp -rf $(RESOURCES)/certs $(BUILD)
 	@if [ ! -f "$(SITE_CERT)" ] ; \
 	then \
 		$(MAKE) -C $(CERTS) ; \
