@@ -10,7 +10,7 @@ module "app" {
 
     # aws
     aws_account_id="${var.aws_account.id}"
-    aws_region = "us-west-2"
+    aws_region = "${var.aws_account.default_region}"
     ami = "${var.ami}"
 
     # vpc
