@@ -1,10 +1,10 @@
-web: plan_web
+web: s3 iam plan_web
 	cd $(BUILD); \
 		$(SCRIPTS)/aws-keypair.sh -c web; \
 		$(TF_APPLY) -target module.web
 	@$(MAKE) web_ips
 
-plan_web: init_web
+plan_web: plan_s3 plan_iam init_web
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.web;
 

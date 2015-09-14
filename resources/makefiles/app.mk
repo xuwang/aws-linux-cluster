@@ -1,10 +1,10 @@
-app: plan_app
+app: s3 iam plan_app
 	cd $(BUILD); \
 		$(SCRIPTS)/aws-keypair.sh -c app; \
 		$(TF_APPLY) -target module.app
 	@$(MAKE) app_ips
 
-plan_app: init_app
+plan_app: plan_s3 plan_iam init_app
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.app;
 
