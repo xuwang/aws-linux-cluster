@@ -13,34 +13,18 @@ resource "aws_security_group" "web"  {
     
     # Allow web peers to communicate, include web proxies
     ingress {
-      from_port = 7001
-      to_port = 7001
+      from_port = 80
+      to_port = 80
       protocol = "tcp"
-      cidr_blocks = ["${var.vpc_cidr}"]
+      cidr_blocks =  ["0.0.0.0/0"]
     }
 
     # Allow web2 peers to communicate, include web proxies
     ingress {
-      from_port = 2380
-      to_port = 2380
+      from_port = 443
+      to_port = 443
       protocol = "tcp"
-      cidr_blocks = ["${var.vpc_cidr}"]
-    }
-
-    # Allow web clients to communicate
-    ingress {
-      from_port = 4001
-      to_port = 4001
-      protocol = "tcp"
-      cidr_blocks = ["${var.vpc_cidr}"]
-    }
-
-    # Allow web2 clients to communicate
-    ingress {
-      from_port = 2379
-      to_port = 2379
-      protocol = "tcp"
-      cidr_blocks = ["${var.vpc_cidr}"]
+      cidr_blocks =  ["0.0.0.0/0"]
     }
 
     # Allow SSH from my hosts
