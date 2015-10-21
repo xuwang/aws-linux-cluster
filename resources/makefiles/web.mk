@@ -1,10 +1,10 @@
-web: s3 iam plan_web
+web: s3 iam vpc plan_web
 	cd $(BUILD); \
 		$(SCRIPTS)/aws-keypair.sh -c web; \
 		$(TF_APPLY) -target module.web
 	@$(MAKE) web_ips
 
-plan_web: plan_s3 plan_iam init_web
+plan_web: plan_s3 plan_iam plan_vpc init_web
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.web;
 
@@ -23,7 +23,7 @@ destroy_web: | $(TF_PORVIDER)
 clean_web: destroy_web
 	rm -f $(BUILD)/module-web.tf
 
-init_web: init_vpc init_s3 init_iam init_elb
+init_web: init
 	cp -f $(RESOURCES)/terraforms/module-web.tf $(BUILD)
 	cd $(BUILD); $(TF_GET);
 
