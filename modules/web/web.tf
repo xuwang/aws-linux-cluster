@@ -57,14 +57,14 @@ resource "aws_iam_instance_profile" "web" {
 resource "aws_iam_role_policy" "web_policy" {
     name = "web_policy"
     role = "${aws_iam_role.web.id}"
-    policy = "${file(\"policies/web_policy.json\")}"
+    policy = "${file("policies/web_policy.json")}"
     depends_on = [ "aws_iam_role.web" ]
 }
 
 resource "aws_iam_role" "web" {
     name = "web"
     path = "/"
-    assume_role_policy =  "${file(\"policies/assume_role_policy.json\")}"
+    assume_role_policy =  "${file("policies/assume_role_policy.json")}"
 }
 
 

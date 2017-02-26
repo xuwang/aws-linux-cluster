@@ -8,8 +8,8 @@ module "web" {
     allow_ssh_cidr="0.0.0.0/0"
 
     # aws
-    aws_account_id="${var.aws_account.id}"
-    aws_region = "${var.aws_account.default_region}"
+    aws_account_id="${var.aws_account["id"]}"
+    aws_region = "${var.aws_account["default_region"]}"
     ami = "${var.ami}"
 
     # Note: currently web launch_configuration devices can NOT be changed after web cluster is up
