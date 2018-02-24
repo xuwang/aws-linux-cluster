@@ -30,7 +30,7 @@ POLICIES := $(BUILD)/policies
 TF_VARS=$(BUILD)/variables.tf
 
 # Terraform files
-TF_PORVIDER := $(BUILD)/provider.tf
+TF_PROVIDER := $(BUILD)/provider.tf
 TF_DESTROY_PLAN := $(BUILD)/destroy.tfplan
 TF_APPLY_PLAN := $(BUILD)/destroy.tfplan
 TF_STATE := $(BUILD)/terraform.tfstate
@@ -39,6 +39,7 @@ TF_STATE := $(BUILD)/terraform.tfstate
 TF_GET := terraform get -update
 TF_SHOW := terraform show -module-depth=1
 TF_GRAPH := terraform graph -draw-cycles -verbose
+TF_INIT := terraform init
 TF_PLAN := terraform plan -module-depth=1
 TF_APPLY := terraform apply
 TF_REFRESH := terraform refresh
