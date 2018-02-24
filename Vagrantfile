@@ -65,4 +65,5 @@ echo PATH=$PATH:/opt/terraform > /etc/profile.d/terraform.sh
 aws --version
 jq --version
 /opt/terraform/terraform --version
+echo 'Run "varant ssh" to login.'
 SCRIPT
