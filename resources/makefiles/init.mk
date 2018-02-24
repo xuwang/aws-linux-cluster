@@ -10,7 +10,7 @@ graph: | $(BUILD)
 refresh: init
 	cd $(BUILD); $(TF_REFRESH)
 
-init: | check-profile $(TF_PROVIDER) $(AMI_VARS)
+init: check-profile $(TF_PROVIDER) $(AMI_VARS)
 	cd $(BUILD); $(TF_INIT)
 
 $(BUILD): init_build_dir
