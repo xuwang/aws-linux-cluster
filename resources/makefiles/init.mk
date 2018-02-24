@@ -10,7 +10,7 @@ graph: | $(BUILD)
 refresh: init
 	cd $(BUILD); $(TF_REFRESH)
 
-init: | $(TF_PROVIDER) $(AMI_VARS)
+init: | check-profile $(TF_PROVIDER) $(AMI_VARS)
 	cd $(BUILD); $(TF_INIT)
 
 $(BUILD): init_build_dir
@@ -20,6 +20,13 @@ $(TF_PROVIDER): update_provider
 $(AMI_VARS): update_ami
 
 $(SITE_CERT): gen_certs
+
+.PHONY: check-profile
+check-profile: ## validate AWS profile
+	@if ! aws --profile ${AWS_PROFILE} sts get-caller-identity --output text --query 'Account'> /dev/null 2>&1 ; then \
+                echo "ERROR: AWS profile \"${AWS_PROFILE}\" is not setup!"; \
+                exit 1 ; \
+        fi
 
 update_provider: | $(BUILD)
 	# Generate tf provider
