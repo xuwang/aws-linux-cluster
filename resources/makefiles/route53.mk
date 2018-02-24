@@ -6,11 +6,11 @@ plan_route53: plan_vpc init_route53
 	cd $(BUILD); \
 	$(TF_PLAN) -target module.route53;
 
-refresh_route53: | $(TF_PORVIDER)
+refresh_route53: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_REFRESH) -target module.route53
 
-destroy_route53: | $(TF_PORVIDER)
+destroy_route53: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_DESTROY) -target module.route53;
 

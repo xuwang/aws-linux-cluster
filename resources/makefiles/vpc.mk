@@ -8,11 +8,11 @@ plan_vpc: init_vpc
 	cd $(BUILD); \
 	$(TF_PLAN) -target module.vpc;
 
-refresh_vpc: | $(TF_PORVIDER)
+refresh_vpc: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_REFRESH) -target module.vpc
 
-destroy_vpc: | $(TF_PORVIDER)
+destroy_vpc: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_DESTROY) -target module.vpc
 

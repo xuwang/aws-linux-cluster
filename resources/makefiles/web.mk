@@ -8,12 +8,12 @@ plan_web: plan_s3 plan_iam plan_vpc init_web
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.web;
 
-refresh_web: | $(TF_PORVIDER)
+refresh_web: | $(TF_PROVIDER)
 	cd $(BUILD); \
 		$(TF_REFRESH) -target module.web
 	@$(MAKE) web_ips
 
-destroy_web: | $(TF_PORVIDER)
+destroy_web: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	  $(SCRIPTS)/aws-keypair.sh -d web; \
 		$(TF_DESTROY) -target module.web.aws_autoscaling_group.web; \

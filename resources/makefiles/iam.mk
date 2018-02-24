@@ -6,11 +6,11 @@ plan_iam: init_iam
 	cd $(BUILD); \
 	$(TF_PLAN) -target module.iam;
 
-refresh_iam: | $(TF_PORVIDER)
+refresh_iam: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_REFRESH) -target module.iam
 
-destroy_iam: | $(TF_PORVIDER)
+destroy_iam: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_DESTROY) -target module.iam; \
 	rm -f $(CONFIG)/aws-files.yaml

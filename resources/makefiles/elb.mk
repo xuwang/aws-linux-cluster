@@ -7,12 +7,12 @@ plan_elb: plan_vpc init_elb
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.elb;
 
-refresh_elb: | $(TF_PORVIDER)
+refresh_elb: | $(TF_PROVIDER)
 	cd $(BUILD); \
 		$(TF_REFRESH) -target module.elb
 	@$(MAKE) elb_names
 
-destroy_elb: | $(TF_PORVIDER)
+destroy_elb: | $(TF_PROVIDER)
 	cd $(BUILD); \
 		$(TF_DESTROY) -target module.elb
 	rm -f $(CONFIG)/aws-files.yaml

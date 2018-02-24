@@ -6,11 +6,11 @@ plan_rds: vpc init_rds
 	cd $(BUILD); \
 	$(TF_PLAN) -target module.rds;
 
-refresh_rds: | $(TF_PORVIDER)
+refresh_rds: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_REFRESH) -target module.rds
 
-destroy_rds: | $(TF_PORVIDER)
+destroy_rds: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	$(TF_DESTROY) -target module.rds; \
 	rm -f $(CONFIG)/aws-files.yaml

@@ -8,12 +8,12 @@ plan_app: plan_s3 plan_iam plan_vpc init_app
 	cd $(BUILD); \
 		$(TF_PLAN) -target module.app;
 
-refresh_app: | $(TF_PORVIDER)
+refresh_app: | $(TF_PROVIDER)
 	cd $(BUILD); \
 		$(TF_REFRESH) -target module.app
 	@$(MAKE) app_ips
 
-destroy_app: | $(TF_PORVIDER)
+destroy_app: | $(TF_PROVIDER)
 	cd $(BUILD); \
 	  $(SCRIPTS)/aws-keypair.sh -d app; \
 		$(TF_DESTROY) -target module.app.aws_autoscaling_group.app; \
